@@ -25,11 +25,12 @@ const app = dialogflow({debug: true});
 
 app.intent('favorite color', (conv, {color}) => {
     const luckyNumber = color.length;
+    const audioSound = 'https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg';
 
     if (conv.data.userName) {
-      conv.close(`${conv.data.userName}, your lucky number is ${luckyNumber}.`);
+      conv.close(`<speak>${conv.data.userName}, your lucky number is ${luckyNumber}. <audio src="${audioSound}"></audio> </speak>`);
     } else {
-      conv.close(`Your lucky number is ${luckyNumber}.`);
+      conv.close(`Your lucky number is ${luckyNumber}. <audio src="${audioSound}"></audio> </speak>`);
     }
 });
 
