@@ -44,12 +44,12 @@ app.intent('Default Welcome Intent', (conv) => {
 });
 
 app.intent('actions_intent_PERMISSION', (conv, params, permissionGranted) => {
-  if (permissionGranted) {
-    conv.data.userName = conv.user.name.display;
-    conv.ask(`Thanks, ${conv.data.userName}. What's your favorite color?`);
+  if (!permissionGranted) {
+    conv.ask(`Ok, no worries. What's your favorite color?`);
     conv.ask(new Suggestions('Blue', 'Red', 'Green'));
   } else {
-    conv.ask(`Ok, no worries. What's your favorite color?`);
+    conv.data.userName = conv.user.name.display;
+    conv.ask(`Thanks, ${conv.data.userName}. What's your favorite color?`);
     conv.ask(new Suggestions('Blue', 'Red', 'Green'));
   }
 });
