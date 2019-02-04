@@ -27,7 +27,7 @@ app.intent('favorite color', (conv, {color}) => {
     const luckyNumber = color.length;
 
     if (conv.data.userName) {
-      conv.close(`${conv.data.userName}, your lucky number is ${luckyNumber}`);
+      conv.close(`${conv.data.userName}, your lucky number is ${luckyNumber}.`);
     } else {
       conv.close(`Your lucky number is ${luckyNumber}.`);
     }
@@ -41,11 +41,12 @@ app.intent('Default Welcome Intent', (conv) => {
     context: 'Hi there, to get to know you better',
     permissions: 'NAME'
   }));
+  conv.ask(new Suggestions('Yes', 'No'));
 });
 
 app.intent('actions_intent_PERMISSION', (conv, params, permissionGranted) => {
   if (permissionGranted) {
-    conv.data.userName = conv.user.name.dispaly;
+    conv.data.userName = conv.user.name.display;
     conv.ask(`Thanks, ${conv.data.userName}. What's your favorite color?`);
   } else {
     conv.ask(`Ok, no worries. What's your favorite color?`);
