@@ -41,7 +41,6 @@ app.intent('Default Welcome Intent', (conv) => {
     context: 'Hi there, to get to know you better',
     permissions: 'NAME'
   }));
-  conv.ask(new Suggestions('Yes', 'No'));
 });
 
 app.intent('actions_intent_PERMISSION', (conv, params, permissionGranted) => {
