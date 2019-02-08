@@ -89,6 +89,17 @@ app.intent('actions_intent_PERMISSION', (conv, params, permissionGranted) => {
   }
 });
 
+app.intent('actions_intent_NO_INPUT', (conv) => {
+  const repromptCount = parseInt(conv.arguments.get('REPROMPT_COUNT'))
+  if (repromptCount == 0) {
+    conv.ask('Which color would you like to hear about?');
+  } else if (repromptCount == 1) {
+    conv.ask('Please, say the name of the color.');
+  } else if (conv.arguments.get('IS_FINAL_REPROMPT')) {
+    conv.close(`Sorry, we're having trouble. Let's try this again later. Goodbye.`);
+  }
+});
+
 // Handle the Dialogflow intent named 'favorite color'.
 // The intent collects a parameter named 'color'.
 app.intent('favorite color', (conv, {color}) => {
